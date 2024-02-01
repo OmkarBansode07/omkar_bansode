@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InvenTree Software</title>
+    <!-- CSS header files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/static/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<link rel=" stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+
+<body>
+    <!-- JavaScript header files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Header  -->
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">InvenTree</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" a="dashboard.html"></span>
+            </button>
+            <!-- Navbar icons -->
+            <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="Profile.html">Profile</a>
+                </button>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="ContactUs.html">Contact Us</a>
+                </button>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="Logout_page.html">Logout</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Body content  -->
+    <div class="container text-center">
+        <div class="row justify-content-evenly p-3 ">
+            <!-- Dashboard Menus  -->
+            <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="AddNewProduct"
+                name="AddNewProduct"><a href="Add_new_Products.html">Add New <br>
+                    Product</a></button>
+            <button type="button" class="col btn btn-outline-secondary btn-lg text-black  me-4" id="ProductList"
+                name="ProductList">Product <br>
+                List</button>
+            <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="UpdateProduct"
+                name="UpdateProduct"><a href="Add_Existing_product.html">Update
+                    a<br>Product</a> </button>
+            <button type="button" class="col btn btn-outline-secondary btn-lg text-black me-4" id="CreateBill"
+                name="CreateBill"><a href="Create_Bill.html"> Create <br> Bill</a> </button>
+            <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="ManageUsers"
+                name="ManageUsers">Manage <br>
+                Users</button>
+        </div>
+    </div><br>
+
+
+    <div>
+        <h5>Inventory Numerics...</h5>
+    </div>
+    <div class="container text-center">
+        <!-- Numeric Statistics of items in the inventory -->
+        <div class="row justify-content-evenly p-3 ">
+            <button type="button" class="col btn btn-light btn-lg text-black me-4" id="TotalItems" name="TotalItems"
+                disabled>1099 <br> Total
+                Items</button>
+            <button type="button" class="col btn btn-light btn-lg text-black me-4" id="Categories" name="Categories"
+                disabled>20<br>Categories</button>
+            <button type="button" class="col btn btn-light btn-lg text-black me-4" id="ItemSold" name="ItemSold"
+                disabled>150 <br> Items
+                Sold</button>
+            <button type="button" class="col btn btn-light btn-lg text-black me-4" id="ProductReceived"
+                name="ProductReceived" disabled>500<br>Products
+                Recieved</button>
+            <button type="button" class="col btn btn-light btn-lg text-black me-4" id="NewProduct" name="NewProduct"
+                disabled>15 <br> New
+                Products</button>
+        </div>
+    </div>
+    <!-- Charts of the inventory stats -->
+    <div class="d-flex justify-content-evenly">
+        <img src=".img/chart1.png" alt="Quarterly Profit record Record" style="width: 100%">
+        <img src=".img/chart2.png" alt="Quarterly Sales Record" style="width: 100%">
+    </div>
+
+    <!-- Footer  -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-md-end">
+                <div class="col-auto">
+                    <span class="text-bg">© Copyright Persistent Systems Pvt. Ltd. 2024</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
