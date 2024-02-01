@@ -32,9 +32,9 @@
             <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
                 <button class="btn btn-light btn-outline me-2" type="button"><a href="Profile.html">Profile</a>
                 </button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="ContactUs.html">Contact Us</a>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="{{url_for('contactus')}}">Contact Us</a>
                 </button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="Logout_page.html">Logout</a>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="{{url_for('login')}}">Logout</a>
                 </button>
             </div>
         </div>
@@ -86,8 +86,8 @@
     </div>
     <!-- Charts of the inventory stats -->
     <div class="d-flex justify-content-evenly">
-        <img src=".img/chart1.png" alt="Quarterly Profit record Record" style="width: 100%">
-        <img src=".img/chart2.png" alt="Quarterly Sales Record" style="width: 100%">
+        <img src="/static/chart1.png" alt="Quarterly Profit record Record" style="width: 100%">
+        <img src="/static/chart2.png" alt="Quarterly Sales Record" style="width: 100%">
     </div>
 
     <!-- Footer  -->
