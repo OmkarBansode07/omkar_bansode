@@ -103,7 +103,7 @@ def otp_page():
 
      if request.form["otp"] in created_otp:
         # username = session['username'] 
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
      else:
         flash("Wrong OTP !! TRY AGAIN !!")
         return redirect(url_for('otp_page'))
@@ -127,6 +127,10 @@ def logout():
    session.pop("username")
    session.pop("loggedin")
    return redirect(url_for("login"))
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+   return render_template("dashboard.html")
 
 #To run the application
 if __name__ == '__main__':
