@@ -130,6 +130,9 @@ def add_new_product():
   # fetching data from user 
   barcode_value=barcode_scanner.extract_barcode()
   pbar=barcode_value[0]
+  p_manu_code =  barcode_value[2]
+  p_cate_code = barcode_value[1]
+  p_name_code = barcode_value[4]
   print("barcode value from api : ",barcode_value)
   # product_id =request.form['username']
   # product_manufacturer =request.form['username']
