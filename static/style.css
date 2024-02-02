@@ -60,3 +60,26 @@ a {
 .alert.error {
     background-color: red;
   }
+
+.margin-b-0-5{
+    margin-bottom: 0.5rem !important;
+}
+
+.margin-b-0{
+    margin-bottom: 0rem !important;
+}
+
+.dashboard-img{
+    height: 4rem;
+    border-radius: 4000;
+}
+
+.dashboard-item-card{
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.dashboard-item-card:hover {
+    background-color: #D9D9D9;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
