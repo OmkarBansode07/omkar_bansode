@@ -171,6 +171,10 @@ def logout():
    session.pop("loggedin")
    return redirect(url_for("login"))
 
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+   return render_template("dashboard.html")
+
 #To run the application
 if __name__ == '__main__':
     app.run(debug=True)
