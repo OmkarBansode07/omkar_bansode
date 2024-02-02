@@ -127,10 +127,26 @@ def dashboard():
 #Add new product
 @app.route('/add_new_product')
 def add_new_product():
+  # fetching data from user 
   barcode_value=barcode_scanner.extract_barcode()
   print("barcode value from api : ",barcode_value)
+  # product_id =request.form['username']
+  # product_manufacturer =request.form['username']
+  # product_manufacturer_code =request.form['username']
+  # product_category =request.form['username']
+  # product_category_code =request.form['username']
+  # product_name =request.form['username']
+  # product_name_code =request.form['username']
+  # product_price =request.form['username']
+  # product_measure =request.form['username']
+  # product_size =request.form['username']
+  # product_expiry =request.form['username']
+  # product_mfg =request.form['username']
+  # product_stock_quantity=request.form['username']
+  
   cur = mysql.connection.cursor()
-  cur.execute(f"insert into products values({barcode_value[0]},2,3,4,5,6,7,8,9,10,11,12,13)")
+  query=f"insert into products values({barcode_value[0]},2,3,4,5,6,7,8,9,10,11,12,13)"
+  cur.execute(query)
   mysql.connection.commit()
   cur.close()
 
