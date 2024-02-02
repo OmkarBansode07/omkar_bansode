@@ -1,8 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for ,session,redirect ,flash
 from flask_mysqldb import MySQL
-from adapter import otp
+from adapter import otp,barcode_scanner
 import time
-
 
 app = Flask(__name__)
 app.secret_key = ("superkey")
@@ -14,13 +13,9 @@ app.config['MYSQL_PASSWORD'] = ""
 app.config['MYSQL_DB'] = "inventory"
 mysql = MySQL(app)
 
-
-
 #Welcome Page
 @app.route('/')
 def welcome():
-  
-  
   return render_template("welcome.html")
 
 #ContactUs Page
@@ -28,18 +23,14 @@ def welcome():
 def contactus():
   return render_template("contactus.html")
 
-
-
 # Index Page for test
-
 @app.route('/index', methods=['GET','POST'] )
 def index():
   if len(session) == 0:
     return render_template("login.html")
   else:
     return render_template("index.html", username = session["username"])
-
-
+  
 #Login Page for Application 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -79,9 +70,10 @@ def login():
         print("user contact is : ",user_contact)
         global created_otp
         created_otp = otp.generate_otp()
+        cur.close()
 
         
-        otp.send_otp(user_contact,created_otp)
+        #otp.send_otp(user_contact,created_otp)
         
         return redirect(url_for('otp_page'))
     
@@ -93,23 +85,18 @@ def login():
      
      return render_template('login.html')
 
+#
 def s_user():
   u = session['username']
   print(u)
 
 #OTP Page for application
-
 created_otp= otp.generate_otp()
-
-
 
 @app.route('/otp_page',methods= ['GET','POST'])
 def otp_page():
   print(created_otp)
-  #print(created_otp,created_otp[-5::])
-  
-
-  
+  #print(created_otp,created_otp[-5::])  
   if request.method == "POST":
      print(request.form["otp"])
      print(request.form["otp"] in created_otp[-5::]  )
@@ -118,7 +105,7 @@ def otp_page():
 
      if request.form["otp"] in created_otp:
         # username = session['username'] 
-        return redirect(url_for('Dashboard'))
+        return redirect(url_for('dashboard'))
      else:
         flash("Wrong OTP !! TRY AGAIN !!")
         
@@ -129,20 +116,33 @@ def otp_page():
      
      return render_template("otp_page.html")
 
-
 #Dashboard Page
-@app.route('/Dashboard')
-def Dashboard():
+@app.route('/dashboard')
+def dashboard():
    print('Dashboard = ',session["username"])
-   return render_template('Dashboard.html')
+   return render_template('dashboard.html')
+ 
+ #Add New product
 
+#Add new product
+@app.route('/add_new_product')
+def add_new_product():
+  barcode_value=barcode_scanner.extract_barcode()
+  print("barcode value from api : ",barcode_value)
+  cur = mysql.connection.cursor()
+  cur.execute(f"insert into products values({barcode_value[0]},2,3,4,5,6,7,8,9,10,11,12,13)")
+  mysql.connection.commit()
+  cur.close()
+
+  
+  return render_template('add_new_product.html')
+ 
 #Resend otp page:
 @app.route('/resend_otp')
 def resend_otp():
    #otp.send_otp("+917757963133",created_otp)
    flash("New OTP Sent!! ")
    return redirect(url_for('otp_page'))
-
 
 #logout function  
 @app.route('/logout', methods=['POST'])
