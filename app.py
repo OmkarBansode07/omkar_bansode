@@ -85,13 +85,13 @@ def login():
      
      return render_template('login.html')
 
-#
+#Session user
 def s_user():
   u = session['username']
   print(u)
 
 #OTP Page for application
-created_otp= otp.generate_otp()
+#created_otp= otp.generate_otp()
 
 @app.route('/otp_page',methods= ['GET','POST'])
 def otp_page():
@@ -129,6 +129,7 @@ def dashboard():
 def add_new_product():
   # fetching data from user 
   barcode_value=barcode_scanner.extract_barcode()
+  pbar=barcode_value[0]
   print("barcode value from api : ",barcode_value)
   # product_id =request.form['username']
   # product_manufacturer =request.form['username']
@@ -146,12 +147,12 @@ def add_new_product():
   
   cur = mysql.connection.cursor()
   query=f"insert into products values({barcode_value[0]},2,3,4,5,6,7,8,9,10,11,12,13)"
-  cur.execute(query)
-  mysql.connection.commit()
+  #cur.execute(query)
+  #mysql.connection.commit()
   cur.close()
 
   
-  return render_template('add_new_product.html')
+  return render_template('add_new_product.html',product_barcode=pbar)
  
 #Resend otp page:
 @app.route('/resend_otp')
