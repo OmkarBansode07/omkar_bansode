@@ -49,7 +49,7 @@ def login():
   if len(session) > 0:
     print("session")
     # redirect(url_for('logout'))
-    logout()
+    # logout()
   print(session)
   
   if request.method == 'POST':
@@ -103,7 +103,7 @@ def otp_page():
 
      if request.form["otp"] in created_otp:
         # username = session['username'] 
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
      else:
         flash("Wrong OTP !! TRY AGAIN !!")
         return redirect(url_for('otp_page'))
@@ -113,6 +113,22 @@ def otp_page():
      
      return render_template("otp_page.html")
 
+#Dashboard page
+@app.route('/dashboard')
+def dashboard():
+   #print('Dashboard = ', session["username"])
+   username = session["username"]
+   return render_template('dashboard.html', username = username)
+
+#profile page
+@app.route('/profile/<id>',methods=['GET', 'POST'])
+def profile(id):
+  cur = mysql.connection.cursor()
+  cur.execute('select user_username, user_role, user_contact, user_email from users where user_username = %s',(id,))
+  user = cur.fetchone()
+  cur.close()
+  
+  return render_template('profile.html', user = user)
 
 #Resend otp page:
 @app.route('/resend_otp')
@@ -127,6 +143,8 @@ def logout():
    session.pop("username")
    session.pop("loggedin")
    return redirect(url_for("login"))
+
+
 
 #To run the application
 if __name__ == '__main__':
