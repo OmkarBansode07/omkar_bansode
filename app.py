@@ -130,6 +130,17 @@ def profile(id):
   
   return render_template('profile.html', user = user)
 
+#View product List
+@app.route('/product_list', methods=['GET', 'POST'])
+def product_list():
+   cur = mysql.connection.cursor()
+   cur.execute('select product_id, product_category, product_name, product_stock_quantity from products')
+   productList = cur.fetchall()
+   print(productList)
+   cur.close()
+   return render_template('product_list.html', productList = productList)
+   
+
 #Resend otp page:
 @app.route('/resend_otp')
 def resend_otp():
