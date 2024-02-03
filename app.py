@@ -92,7 +92,6 @@ def s_user():
 
 #OTP Page for application
 #created_otp= otp.generate_otp()
-
 @app.route('/otp_page',methods= ['GET','POST'])
 def otp_page():
   print(created_otp)
@@ -125,38 +124,64 @@ def dashboard():
  #Add New product
 
 #Add new product
-@app.route('/add_new_product')
+@app.route('/add_new_product',methods=['GET','POST'])
 def add_new_product():
   # fetching data from user 
-  barcode_value=barcode_scanner.extract_barcode()
-  pbar=barcode_value[0]
-  p_manu_code =  barcode_value[2]
-  p_cate_code = barcode_value[1]
-  p_name_code = barcode_value[4]
-  print("barcode value from api : ",barcode_value)
-  # product_id =request.form['username']
-  # product_manufacturer =request.form['username']
-  # product_manufacturer_code =request.form['username']
-  # product_category =request.form['username']
-  # product_category_code =request.form['username']
-  # product_name =request.form['username']
-  # product_name_code =request.form['username']
-  # product_price =request.form['username']
-  # product_measure =request.form['username']
-  # product_size =request.form['username']
-  # product_expiry =request.form['username']
-  # product_mfg =request.form['username']
-  # product_stock_quantity=request.form['username']
-  
-  cur = mysql.connection.cursor()
-  query=f"insert into products values({barcode_value[0]},2,3,4,5,6,7,8,9,10,11,12,13)"
-  #cur.execute(query)
-  #mysql.connection.commit()
-  cur.close()
+  global barcode_value,p_manu_code,p_cate_code,p_name_code,p_barcode
 
-  
-  return render_template('add_new_product.html',product_barcode=pbar)
- 
+  if request.method=='GET':
+    barcode_value=barcode_scanner.extract_barcode()
+    p_barcode=barcode_value[0]
+    p_manu_code =  barcode_value[2]
+    p_cate_code = barcode_value[1]
+    p_name_code = barcode_value[4]
+    return render_template('add_new_product.html',p_barcode=p_barcode,p_manu_code=p_manu_code,p_cate_code=p_cate_code,p_name_code=p_name_code)
+
+  else:
+    product_manufacturer =request.form['productmanufacturer']
+    product_category=request.form['productcategory']
+    product_name =request.form['productname']
+    product_price =request.form['productprice']
+    product_expirydate =request.form['productexpirydate']
+    product_size =request.form['productsize']
+    product_mfg =request.form['productmanufacturedate']
+    product_measure =request.form['productmeasure']
+    product_stock_quantity =request.form['productstockquantity']
+    print("barcode value from api : ",barcode_value)
+    cur = mysql.connection.cursor()
+    cur.execute('insert into products values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(p_barcode,product_manufacturer,p_manu_code,product_category,p_cate_code,product_name,p_name_code,product_price,product_measure,product_size,product_expirydate,product_mfg,product_stock_quantity))
+    mysql.connection.commit()
+    cur.close()
+    flash("Added")
+    return render_template(dashboard)
+
+#update new product
+@app.route('/update_product',methods=['GET','POST'])
+def update_product():
+  # fetching data from user 
+  global barcode_value,p_barcodes
+
+  if request.method=='GET':
+    barcode_value=barcode_scanner.extract_barcode()
+    p_barcode=barcode_value[0]
+    return render_template('update_product.html',p_barcode=p_barcode)
+
+  else:
+    #product_stock_quantity =request.form['productstockquantity']
+    cur = mysql.connection.cursor()
+    cur.execute('update products set product_stock_quantity =%s where product_id=%s',(12,p_barcode))
+    mysql.connection.commit()
+    cur.close()
+    flash("Added")
+    return render_template('dashboard.html')
+
+# remove product
+@app.route('/create_bill',methods=['GET','POST'])
+def create_bill():
+  if request.method=='POST':
+    return render_template('create_bill.html')
+  return render_template('create_bill.html')
+
 #Resend otp page:
 @app.route('/resend_otp')
 def resend_otp():
@@ -171,9 +196,6 @@ def logout():
    session.pop("loggedin")
    return redirect(url_for("login"))
 
-@app.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
-   return render_template("dashboard.html")
 
 #To run the application
 if __name__ == '__main__':
