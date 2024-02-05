@@ -16,26 +16,28 @@ mysql = MySQL(app)
 #Welcome Page
 @app.route('/')
 def welcome():
+  #time.sleep(1)
   return render_template("welcome.html")
 
 #ContactUs Page
 @app.route('/contactus',methods=['GET','POST'] )
 def contactus():
+  #time.sleep(1)
   return render_template("contactus.html")
 
-# Index Page for test
-@app.route('/index', methods=['GET','POST'] )
-def index():
-  if len(session) == 0:
-    return render_template("login.html")
-  else:
-    return render_template("index.html", username = session["username"])
+# # Index Page for test
+# @app.route('/index', methods=['GET','POST'] )
+# def index():
+  
+#   if len(session) == 0:
+#     return render_template("login.html")
+#   else:
+#     return render_template("index.html", username = session["username"])
   
 #Login Page for Application 
 @app.route('/login', methods=['GET','POST'])
 def login():
-  msg = ''
-  
+  #time.sleep(1)  
   record = ""
   print(session)
 
@@ -52,12 +54,9 @@ def login():
     cur.execute('select * from users where user_username =%s and user_password = %s',(username, password,))
     record = cur.fetchone()
     print("LOG: record user-m:Post:", record)
-    if record:
+    if record :
         print("LOG: record user:", record) 
         #Session start
-        
-
-        
         session['loggedin'] = True
         session["username"] = username
         cur = mysql.connection.cursor()
@@ -153,23 +152,32 @@ def add_new_product():
     mysql.connection.commit()
     cur.close()
     flash("Added")
-    return render_template(dashboard)
+    return render_template('dashboard.html')
 
 #update new product
 @app.route('/update_product',methods=['GET','POST'])
 def update_product():
   # fetching data from user 
-  global barcode_value,p_barcodes
-
+  global barcode_value,p_barcode,available_stock
+  
   if request.method=='GET':
+    available_stock=0
     barcode_value=barcode_scanner.extract_barcode()
     p_barcode=barcode_value[0]
+    cur = mysql.connection.cursor()
+    cur.execute('select product_stock_quantity from products where product_id =%s ',(p_barcode,))
+    stock_query_result=cur.fetchone()
+    for i in stock_query_result:
+      available_stock=i     
+    print(available_stock)
+    cur.close()
     return render_template('update_product.html',p_barcode=p_barcode)
 
   else:
     #product_stock_quantity =request.form['productstockquantity']
     cur = mysql.connection.cursor()
-    cur.execute('update products set product_stock_quantity =%s where product_id=%s',(12,p_barcode))
+    new_stock = request.form['productstockquantity']
+    cur.execute('update products set product_stock_quantity =%s where product_id=%s',(available_stock+int(new_stock),p_barcode))
     mysql.connection.commit()
     cur.close()
     flash("Added")
@@ -190,11 +198,11 @@ def resend_otp():
    return redirect(url_for('otp_page'))
 
 #logout function  
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['GET','POST'])
 def logout():
    session.pop("username")
    session.pop("loggedin")
-   return redirect(url_for("login"))
+   return render_template("logout.html")
 
 
 #To run the application

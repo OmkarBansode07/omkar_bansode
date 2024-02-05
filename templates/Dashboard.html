@@ -46,7 +46,7 @@
             <a href="ContactUs.html">Contact Us</a>
           </button>
           <button class="btn btn-light btn-outline me-2" type="button">
-            <a href="Logout_page.html">Logout</a>
+            <a href="{{url_for('logout')}}">Logout</a>
           </button>
         </div>
       </div>
@@ -58,7 +58,7 @@
                             {% for message in messages %}
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ message.title() }}!</strong> 
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="success" aria-label="Close"></button>
                               </div>
                             
                             {% endfor %}
