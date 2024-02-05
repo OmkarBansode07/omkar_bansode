@@ -121,10 +121,10 @@ def dashboard():
    return render_template('dashboard.html', username = username)
 
 #profile page
-@app.route('/profile/<id>',methods=['GET', 'POST'])
-def profile(id):
+@app.route('/profile/<username>',methods=['GET', 'POST'])
+def profile(username):
   cur = mysql.connection.cursor()
-  cur.execute('select user_username, user_role, user_contact, user_email from users where user_username = %s',(id,))
+  cur.execute('select user_username, user_role, user_contact, user_email from users where user_username = %s',(username,))
   user = cur.fetchone()
   cur.close()
   
@@ -140,6 +140,28 @@ def product_list():
    cur.close()
    return render_template('product_list.html', productList = productList)
    
+#product_details_page
+@app.route('/product_details_page/<product_id>' , methods=['GET', 'POST'])
+
+def product_details_page(product_id):
+   cur = mysql.connection.cursor()
+   cur.execute('select * from products where product_id = %s',(product_id,))
+   productdetails=cur.fetchone()
+   print(productdetails)
+   cur.close()
+   return render_template('product_details_page.html',productdetails=productdetails)
+
+#View employee List
+@app.route('/employee_list', methods=['GET', 'POST'])
+def employee_list():
+   cur = mysql.connection.cursor()
+   cur.execute('select user_id, user_role,user_username from users')
+   employeeList = cur.fetchall()
+   print(employeeList)
+   cur.close()
+   return render_template('employee_list.html', employeeList = employeeList)
+
+
 
 #Resend otp page:
 @app.route('/resend_otp')

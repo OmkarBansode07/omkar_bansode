@@ -30,7 +30,7 @@
             </button>
             <!-- Navbar icons -->
             <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="{{ url_for('profile', id=username) }}">Profile</a>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="{{ url_for('profile', username=username) }}">Profile</a>
                 </button>
                 <button class="btn btn-light btn-outline me-2" type="button"><a href="ContactUs.html">Contact Us</a>
                 </button>
@@ -56,8 +56,8 @@
             <button type="button" class="col btn btn-outline-secondary btn-lg text-black me-4" id="CreateBill"
                 name="CreateBill"><a href="Create_Bill.html"> Create <br> Bill</a> </button>
             <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="ManageUsers"
-                name="ManageUsers">Manage <br>
-                Users</button>
+                name="ManageUsers"><a href="{{ url_for('employee_list') }}">Manage Users</a> <br>
+        </button>
         </div>
     </div><br>
 

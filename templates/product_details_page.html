@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InvenTree Software</title>
+    <!-- CSS header files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- JavaScript header files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Header  -->
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">InvenTree</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Dashboard.html">Dashboard</a></button>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Profile.html">Profile</a></button>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/ContactUs.html">Contact
+                        Us</a></button>
+                <button class="btn btn-light btn-outline me-2" type="button"><a
+                        href="/templates/Logout_page.html">Logout</a></button>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- body content -->
+    <div class="container">
+        <div class="row">
+            <div class="col pt-3">
+                <a href="#" class="btn btn-light" onclick="history.go(-1);">Back</a>
+            </div>
+        </div>
+        <h3 class="mt-2 pt-3">View Product Details</h3>
+        <form action="{{url_for('product_details_page', product_id=product_id)}}" method="get" target="_blank">
+            <!-- Product id code  -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product ID/Barcode ID :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext" 
+                        value="{{ productdetails[0]}}">
+                </div>
+            </div>
+            <!-- product name -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[5]}}">
+                </div>
+            </div>
+            <!-- product category -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Category :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[3]}}">
+                </div>
+            </div>
+            <!-- product sub-category -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Category Code :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                         value="{{ productdetails[4]}}">
+                </div>
+            </div>
+            <!-- product size -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Size :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                         value="{{ productdetails[9]}}">
+                </div>
+            </div>
+            <!-- product price -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Price :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[7]}}">
+                </div>
+            </div>
+            <!-- product stock quantity -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Stock Quantity :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[12]}}">
+                </div>
+            </div>
+            <!-- product measure code -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Measure :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[8]}}">
+                </div>
+            </div>
+            <!-- Product manufacture date code -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Manufacture Date: :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[11]}}">
+                </div>
+            </div>
+            <!-- Product Expiry date -->
+            <div class="mb-3 mt-4">
+                <label for="exampleFormControlInput1" class="form-label">Product Expiry Date :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[10]}}">
+                </div>
+            </div>
+            <!-- product manufacturer -->
+            <div class="mb-3 mt-4 ">
+                <label for="exampleFormControlInput1" class="form-label">Product Manufacturer :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly class="form-control-plaintext"
+                        value="{{ productdetails[1]}}">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-md-end">
+                <div class="col-auto">
+                    <span class="text-bg">© Copyright Persistent Systems Pvt. Ltd. 2024</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
