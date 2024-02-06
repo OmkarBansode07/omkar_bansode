@@ -8,18 +8,16 @@
     <!-- CSS files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     <link href="/static/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Javascript header files -->
+    <!-- javascript header files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
     <!-- Header  -->
-
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">InvenTree</a>
@@ -28,11 +26,15 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Navbar icons  -->
+            <!-- navbar icons -->
             <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Dashboard.html">Dashboard</a></button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/ContactUs.html">Contact Us</a></button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Logout_page.html">Logout</a></button>
+                <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-2" type="button"><a
+                        href="/templates/Dashboard.html">Dashboard</a></button>
+                <button id="id-profile" name="btn-profile"class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Profile.html">Profile</a></button>
+                <button id="id-contactus" name="btn-contactus" class="btn btn-light btn-outline me-2" type="button"><a href="/templates/ContactUs.html">Contact
+                        Us</a></button>
+                <button id="id-logout" name="btn-logout" class="btn btn-light btn-outline me-2" type="button"><a
+                        href="/templates/Logout_page.html">Logout</a></button>
             </div>
         </div>
     </nav>
@@ -40,98 +42,79 @@
 
 
     <!-- body content -->
+    <form action="{{url_for('create_bill')}}" method="post" target="_blank">
     <div class="container">
-        <div class="row justify-content-end mt-4">
-            <!-- back button -->
-            <div class="col">
-                <a href="#" class="btn btn-light" onclick="history.go(-1);">Back</a>
-            </div>
-            <!-- Scan and cancel button -->
-            <div class="col-auto">
-                <button class="btn btn-light btn-outline me-5" type="button"><a href="#">Cancel</a></button>
-                <button class="btn btn-light btn-outline" type="button" data-bs-toggle="modal"
-                    data-bs-target="#scanModal"><a href="{{url_for('create_bill_scanner')}}">Scan Product</a></button>
-            </div>
-        </div><br>
-        <h3>Create Bill</h3>
-        <form action="{{url_for('create_bill')}}" method="post" target="_blank">
-            <!-- Customer name code -->
-            <div class="mb-3 mt-4">
-                <label for="CustomerName" class="form-label">Customer Name :</label>
-                <input type="text" class="form-control" id="CustomerName" name="CustomerName" placeholder="Enter Customer Name">
-            </div>
-            <!-- contact number code -->
-            <div class="mb-3 mt-4">
-                <label for="exampleFormControlInput1" class="form-label">Customer Contact Number:</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1"
-                    placeholder="Enter Customer Contact Number">
-            </div>
-            <!-- email id code  -->
-            <div class="mb-3 mt-4">
-                <label for="exampleFormControlInput1" class="form-label">Customer Email ID:</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1"
-                    placeholder="Enter Customer Email ID">
-            </div>
-            <!-- cancel and scan product -->
-            <div class="row justify-content-center mt-4">
-                <div class="col-auto">
-                    <button class="btn btn-light btn-outline me-4 " type="button"><a href="#">Cancel</a></button>
-                    <button class="btn btn-light btn-outline" data-bs-toggle="modal" data-bs-target="#scanModal"
-                        type="button"><a href="#">Scan Product</a></button>
-                </div>
-            </div>
-        </form>
+        <h3 class="mt-2 pt-3">Invoice Number :- ####</h3>
+        <!-- Search bar -->
+        
+        <!-- Employee  List Code -->
+        <table class="table table-hover mt-5">
+            <thead>
+                <tr>
+                    <th>Sr.</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Quantity</th>
+                    <th>Equal</th>
+                </tr>
+            </thead>
+            <tbody id="ProductTable">
+                <tr>
+                    <td>1011</a></td>
+                    <td>TV</td>
+                    <td>25000</td>
+                    <td>1</td>
+                    <td>25000</td>
+
+                </tr>
+                <tr>
+                    <td>1012</td>
+                    <td>Mobile</td>
+                    <td>40000</td>
+                    <td>1</td>
+                    <td>40000</td>
+                </tr>
+                <tr>
+                    <td>1013</td>
+                    <td>Laptop</td>
+                    <td>100000</td>
+                    <td>1</td>
+                    <td>100000</td>
+                </tr>
+                <tr>
+                    <td>1014</td>
+                    <td>Book</td>
+                    <td>50000</td>
+                    <td>1</td>
+                    <td>50000</td>
+                </tr>
+                <tr>
+                    <td>1015</td>
+                    <td>TV</td>
+                    <td>200000</td>
+                    <td>1</td>
+                    <td>200000</td>
+                </tr>
+                <tr>
+                    <td>1015</td>
+                    <td>TV</td>
+                    <td>100000</td>
+                    <td>1</td>
+                    <td>100000</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <!--Button Trigger  Modal 1 -->
-    <div class="modal fade" id="scanModal" tabindex="-1" aria-labelledby="scanModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <!-- choose options list code -->
-                <div class="modal-body text-center">
-                    <h6>Choose an Option</h6>
-                    <button type="button" class="btn btn-light btn-block mt-4 btn-lg modal-btn"
-                        data-bs-target="#BillModal" data-bs-toggle="modal">Generate Bill</button>
-                    <button type="button" class="btn btn-light btn-block mt-4 btn-lg modal-btn"><a
-                            href="/templates/Add_Existing_product.html">Scan More Products</a></button>
-                    <button type="button" class="btn btn-light btn-block mt-4 btn-lg modal-btn"
-                        data-bs-dismiss="modal"><a href="#">Cancel Bill</a></button>
-                </div>
-            </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-auto">
+            <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-5"
+                type="button"><a href="/templates/Dashboard.html">Cancel</a></button>
+                <button id="id-scanmore" name="btn-scanmore" class="btn btn-light btn-outline" type="button" >Scan More</button>
+                <button id="id-sendbill" name="btn-sendbill" class="btn btn-light btn-outline" type="button" >Send Bill</button>
         </div>
     </div>
-
-    <!-- Confirmation Bill window yes/no -->
-    <div class="modal fade" id="BillModal" tabindex="-1" aria-labelledby="BillModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <h5>Send Bill on Whatapp</h5>
-                    <button type="button" class="btn btn-light btn-block ms-4" data-bs-target="#BillSentModal"
-                        data-bs-toggle="modal">Yes</button>
-                    <button type="button" class="btn btn-light btn-block ms-4" data-bs-dismiss="modal">No</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bill succesfully sent -->
-    <div class="modal fade" id="BillSentModal" tabindex="-1" aria-labelledby="BillSentModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <h4>Bill Invoice Sent Successfully!</h4>
-                    <button type="button" class="btn btn-light btn-block ms-4" data-bs-dismiss="modal"><a
-                            href="/templates/Create_Bill.html">Close</a></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
+</form>
     <!-- footer -->
     <footer class="footer">
         <div class="container">
