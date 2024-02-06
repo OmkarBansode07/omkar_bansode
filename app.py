@@ -22,13 +22,13 @@ def welcome():
 #ContactUs Page
 @app.route('/contactus',methods=['GET','POST'] )
 def contactus():
-  #time.sleep(1)
+  time.sleep(1)
   return render_template("contactus.html")
 
 #Login Page for Application 
 @app.route('/login', methods=['GET','POST'])
 def login():
-  #time.sleep(1)  
+  time.sleep(1)  
   record = ""
   
   print(session)
@@ -123,14 +123,19 @@ def add_new_product():
     print("Inside permission 1 or 2")
     # fetching data from user 
     global barcode_value,p_manu_code,p_cate_code,p_name_code,p_barcode
+    
 
     if request.method=='GET':
       barcode_value=barcode_scanner.extract_barcode()
-      p_barcode=barcode_value[0]
-      p_manu_code =  barcode_value[2]
-      p_cate_code = barcode_value[1]
-      p_name_code = barcode_value[4]
-      return render_template('add_new_product.html',p_barcode=p_barcode,p_manu_code=p_manu_code,p_cate_code=p_cate_code,p_name_code=p_name_code)
+      print(check_product(barcode_value[0]))
+      if check_product(barcode_value[0]):
+        return render_template('update_product.html',p_barcode=barcode_value[0])
+      else:
+        p_barcode=barcode_value[0]
+        p_manu_code =  barcode_value[2]
+        p_cate_code = barcode_value[1]
+        p_name_code = barcode_value[4]
+        return render_template('add_new_product.html',p_barcode=p_barcode,p_manu_code=p_manu_code,p_cate_code=p_cate_code,p_name_code=p_name_code)
 
     else:
       product_manufacturer =request.form['productmanufacturer']
@@ -176,22 +181,27 @@ def product_details_page(product_id):
 #update new product
 @app.route('/update_product',methods=['GET','POST'])
 def update_product():
-  # fetching data from user 
+  # fetching data from user
   global barcode_value,p_barcode,available_stock
-  
   if request.method=='GET':
     available_stock=0
     barcode_value=barcode_scanner.extract_barcode()
-    p_barcode=barcode_value[0]
-    cur = mysql.connection.cursor()
-    cur.execute('select product_stock_quantity from products where product_id =%s ',(p_barcode,))
-    stock_query_result=cur.fetchone()
-    for i in stock_query_result:
-      available_stock=i     
-    print(available_stock)
-    cur.close()
-    return render_template('update_product.html',p_barcode=p_barcode)
-
+    if check_product(barcode_value[0]):
+      p_barcode=barcode_value[0]
+      cur = mysql.connection.cursor()
+      cur.execute('select product_stock_quantity from products where product_id =%s ',(p_barcode,))
+      stock_query_result=cur.fetchone()
+      for i in stock_query_result:
+        available_stock=i     
+      print(available_stock)
+      cur.close()
+      return render_template('update_product.html',p_barcode=p_barcode)
+    else:
+      if fetch_user_role(session['username'])==0:
+        flash("No product found, contact manager to add new product into inventory.")
+        return redirect(url_for('dashboard'))
+      else:
+        return redirect(url_for('add_new_product'))
   else:
     #product_stock_quantity =request.form['productstockquantity']
     cur = mysql.connection.cursor()
@@ -220,20 +230,24 @@ billing_items={}
 def create_bill():
   cur=mysql.connection.cursor()
   value=barcode_scanner.extract_barcode()
-  if value[0] in billing_items:
-    billing_items[value[0]]+=1
-  else:
-    cur.execute('select product_name, product_price from products where product_id =%s',(value[0],))
-    billing_items[value[0]]=1
-    r=cur.fetchall()  
-    print(r)
-    cur.close()
-  print(billing_items)
-   
-  if request.method=='POST':
-    print('inside post method')
+  if check_product(value[0]):
+    if value[0] in billing_items:
+      billing_items[value[0]]+=1
+    else:
+      cur.execute('select product_name, product_price from products where product_id =%s',(value[0],))
+      billing_items[value[0]]=1
+      r=cur.fetchall()  
+      print(r)  
+      cur.close()
+    print(billing_items)
+    
+    if request.method=='POST':
+      print('inside post method')
+      return render_template('create_bill.html',billing_items_barcodes=billing_items)
     return render_template('create_bill.html',billing_items_barcodes=billing_items)
-  return render_template('create_bill.html',billing_items_barcodes=billing_items)
+  else:
+    flash('Product not found in inventory try with another product')
+    return render_template('create_bill.html',billing_items_barcodes=billing_items)
 
 #View employee List
 @app.route('/employee_list', methods=['GET', 'POST'])
@@ -290,6 +304,15 @@ def fetch_user_role(username):
     print("Permission : ",user_role)
   return permission
 
+def check_product(b_value):
+  cur = mysql.connection.cursor()
+  cur.execute('select product_id from products where product_id = %s',(b_value,))
+  record = cur.fetchone()
+  if record:
+    return True
+  else:
+    return False
+  
 
 #To run the application
 if __name__ == '__main__':
