@@ -37,13 +37,12 @@
         <!-- Navbar icons -->
         <div
           class="collapse navbar-collapse justify-content-md-end"
-          id="navbarSupportedContent"
-        >
+          id="navbarSupportedContent">
           <button class="btn btn-light btn-outline me-2" type="button">
-            <a href="Profile.html">Profile</a>
+            <a href="{{url_for('profile',username=session['username'])}}">Profile</a>
           </button>
           <button class="btn btn-light btn-outline me-2" type="button">
-            <a href="ContactUs.html">Contact Us</a>
+            <a href="/contactus.html">Contact Us</a>
           </button>
           <button class="btn btn-light btn-outline me-2" type="button">
             <a href="{{url_for('logout')}}">Logout</a>
@@ -163,7 +162,7 @@
           <!-- Product List -->
           <div class="gy-2">
             <a
-              href="#"
+              href="{{url_for('product_list')}}"
               class="card mb-3 p-3 dashboard-item-card"
               style="max-width: 540px"
             >
@@ -207,7 +206,7 @@
           <!-- Create Bill -->
           <div>
             <a
-              href="{{url_for('create_bill')}}"
+              href="{{url_for('customer_details')}}"
               class="card mb-3 p-3 dashboard-item-card"
               style="max-width: 540px"
             >
@@ -229,7 +228,7 @@
           <!-- Users -->
           <div>
             <a
-              href="#"
+              href="{{url_for('employee_list')}}"
               class="card mb-3 p-3 dashboard-item-card"
               style="max-width: 540px"
             >
