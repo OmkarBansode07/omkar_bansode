@@ -161,7 +161,15 @@ def employee_list():
    cur.close()
    return render_template('employee_list.html', employeeList = employeeList)
 
-
+#users details page
+@app.route('/users_details_page/<user_id>' , methods=['GET', 'POST'])
+def users_details_page(user_id):
+   cur = mysql.connection.cursor()
+   cur.execute('select * from users where user_id = %s',(user_id,))
+   employeedetails=cur.fetchone()
+   print(employeedetails)
+   cur.close()
+   return render_template('users_details_page.html',employeedetails=employeedetails)
 
 #Resend otp page:
 @app.route('/resend_otp')

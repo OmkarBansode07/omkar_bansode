@@ -63,7 +63,7 @@
                 {% for j in employeeList %}
                 <tr>
                    
-                    <td>{{ j[0] }}</td>
+                    <td><a href="{{ url_for('users_details_page',user_id=j[0])}}">{{ j[0] }}</a></td>
                     <td>{{ j[1] }}</td>
                     <td>{{ j[2] }}</td>
                 </tr>

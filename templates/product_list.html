@@ -70,7 +70,7 @@
             <tbody id="ProductTable">
                 {% for i in productList %}
                 <tr>
-                    <td><a href="{{ url_for('employee_details',product_id=i[0])}}">{{ i[0] }}</a></td>
+                    <td><a href="{{ url_for('product_details_page',product_id=i[0])}}">{{ i[0] }}</a></td>
                     <td>{{ i[1] }}</td>
                     <td>{{ i[2] }}</td>
                     <td>{{ i[3] }}</td>
