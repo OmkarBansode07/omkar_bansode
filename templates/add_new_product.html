@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InvenTree Software</title>
+    <!-- CSS files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- javascript header files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Header  -->
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">InvenTree</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- navbar icons -->
+            <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+                <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-2" type="button"><a
+                        href="/templates/Dashboard.html">Dashboard</a></button>
+                <!-- <button id="id-profile" name="btn-profile"class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Profile.html">Profile</a></button> -->
+                <button id="id-contactus" name="btn-contactus" class="btn btn-light btn-outline me-2" type="button"><a
+                        href="/templates/ContactUs.html">Contact
+                        Us</a></button>
+                <button id="id-logout" name="btn-logout" class="btn btn-light btn-outline me-2" type="button"><a
+                        href="/templates/Logout_page.html">Logout</a></button>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- body content -->
+    <div class="container">
+        <br>
+        <h3>Add New Product...</h3>
+        <form action="{{url_for('add_new_product')}}" method="post" target="">
+            <!-- product id code -->
+            <div class="mb-3 mt-4">
+                <div>
+                    <label for="ProductID" class="form-label">Product ID/Barcode ID : {{p_barcode}} </label>
+                </div>
+                <div>
+                    <label for="productnamecode" class="form-label">Product Name Code: {{p_manu_code}}</label>
+                </div>
+
+                <div>
+                    <label for="ProductCategoryCode" class="form-label">Product Category Code : {{p_cate_code}}</label>
+                </div>
+                <div>
+                    <label for="ProductManufacturerCode" class="form-label">Product Manufacturer's Code:
+                        {{p_manu_code}}</label>
+                </div>
+
+                <!-- product manufacuturer -->
+                <div class="mb-3 mt-4 ">
+                    <label for="ProductManufacturer" class="form-label">Product Manufacturer :</label>
+                    <input type="text" class="form-control" id="productmanufacturer" name="productmanufacturer"
+                        placeholder="Enter Product  Manufacturer">
+                </div>
+
+                <!-- product category -->
+                <div class="mb-3 mt-4">
+                    <label for="ProductCategory" class="form-label">Product Category :</label>
+                    <input type="text" class="form-control" id="productcategory" name="productcategory"
+                        placeholder="Enter Product Category">
+                </div>
+
+                <!-- product name  -->
+                <div class="mb-3 mt-4">
+                    <label for="productname" class="form-label">Product Name:</label>
+                    <input type="text" class="form-control" id="productname" name="productname"
+                        placeholder="Enter Product Name">
+                </div>
+
+                <!-- product price code  -->
+                <div class="mb-3 mt-4">
+                    <label for="ProductPrice" class="form-label">Product Price :</label>
+                    <input type="text" class="form-control" id="productprice" name="productprice"
+                        placeholder="Enter Product Price">
+                </div>
+
+
+                <!-- product size code  -->
+                <div class="mb-3 mt-4">
+                    <label for="ProductSize" class="form-label">Product Size :</label>
+                    <div class="input-group mb-3">
+                        <!-- dropdown menu -->
+                        <select class="form-select" name="productsize" id="productsize">
+                            <option selected>Choose....</option>
+                            <option value="1">Small</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Large</option>
+                            <option value="3">Extra Large</option>
+                        </select>
+                        <label class="input-group-text" for="productsize">Options</label>
+                    </div>
+                </div>
+                <!-- product expiry code -->
+                <div class="mb-3 mt-4">
+                    <label for="ProductExpiryDate" class="form-label">Product Expiry Date :</label>
+                    <input type="date" class="form-control" id="productexpirydate" name="productexpirydate"
+                        placeholder="Enter Product Expiry Date">
+                </div>
+                <!-- product manufacturing code  -->
+                <div class="mb-3 mt-4">
+                    <label for="ProductManufactureDate" class="form-label">Product Manufacture Date: :</label>
+                    <input type="date" class="form-control" id="productmanufacturedate"
+                        name="productmanufacturedate" placeholder="Enter Product Manufacture Date">
+                </div>
+                <!-- product measure -->
+                <div class="mb-3 mt-4">
+                    <label for="Productmeasure" class="form-label">Product Measure :</label>
+                    <div class="input-group mb-3">
+                        <!-- dropdown menu -->
+                        <select class="form-select" name="productmeasure" id="productmeasure">
+                            <option selected>Choose....</option>
+                            <option value="1">unit</option>
+                            <option value="2">kg</option>
+                            <option value="3">Litre</option>
+                        </select>
+                        <label class="input-group-text" for="productmeasure">Options</label>
+                    </div>
+                </div>
+
+                <!-- product stock quantity  -->
+                <div class="mb-3 mt-4">
+                    <label for="ProductStockQuantity" class="form-label">Product Stock Quantity :</label>
+                    <input type="number" class="form-control" id="productstockquantity"
+                        name="productstockquantity" placeholder="Enter Product Stock Quantity">
+                </div>
+
+            </div>
+            <!-- add and cancel button  -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-auto">
+                    <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-5"
+                        type="button"><a href="{{url_for('dashboard')}}">Cancel</a></button>
+                    <button id="id-addproduct" name="btn-addproduct" class="btn btn-light btn-outline" type="submit"
+                        data-bs-toggle="modal" data-bs-target="#ProductAddModal">Add Product</button>
+                </div>
+            </div>
+        </form>
+    </div> 
+
+    <!-- Product Added Successfully Modal 1 -->
+    <div class="modal fade" id="ProductAddModal" tabindex="-1" aria-labelledby="ProductAddModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h4>Product Added Successfully!</h4>
+                    <button type="{{url_for('dashboard')}}" class="btn btn-light btn-block ms-4" data-bs-dismiss="modal"><a>Close</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-md-end">
+                <div class="col-auto">
+                    <span class="text-bg">© Copyright Persistent Systems Pvt. Ltd. 2024</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

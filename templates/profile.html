@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,18 +8,18 @@
     <!-- CSS header files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+ 
     <link href="/static/style.css" rel="stylesheet">
 </head>
-
+ 
 <body>
     <!-- javascript header files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
+ 
     <!-- Header  -->
-
+ 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">InvenTree</a>
@@ -39,9 +39,9 @@
             </div>
         </div>
     </nav>
-
-
-
+ 
+ 
+ 
     <!-- body content -->
     <div class="container py-5">
         <div class="row">
@@ -53,7 +53,7 @@
             <div class="col-md-6 text-center">
                 <!-- profile picture code  -->
                 <div class="profile-picture mx-auto mb-4">
-                    <img src="/static/photo2.png" class="img-fluid" alt="Profile Picture" name="profileimg">
+                    <img src="/static/profile_photo.svg" class="img-fluid" alt="Profile Picture" name="profileimg">
                 </div>
             </div>
             <div class="col-md-6">
@@ -72,24 +72,24 @@
                         <!-- Contact Number -->
                         <label for="staticMob" class="col-sm-4 col-form-label">Contact Number : </label>
                         <div class="col-sm-8 ">
-                            <input type="text" readonly class="form-control-plaintext" 
+                            <input type="text" readonly class="form-control-plaintext"
                             value="{{ user[2]}}">
                         </div>
                         <!-- Email ID -->
                         <label for="staticEmail" class="col-sm-4 col-form-label ">Email ID : </label>
                         <div class="col-sm-8 ">
-                            <input type="text" readonly class="form-control-plaintext" 
+                            <input type="text" readonly class="form-control-plaintext"
                             value="{{ user[3]}}">
                         </div>
-                        
+                       
                     </div>
                 </form>
-
+ 
             </div>
         </div>
     </div>
-
-
+ 
+ 
     <!-- footer -->
     <footer class="footer">
         <div class="container">
@@ -101,5 +101,5 @@
         </div>
     </footer>
 </body>
-
+ 
 </html>
