@@ -51,6 +51,7 @@ def login():
         #Session start
         session['loggedin'] = True
         session["username"] = username
+        #session['user_role'] = fetch_user_role(session["username"])
         cur = mysql.connection.cursor()
         cur.execute('select user_contact from users where user_username = %s',(session['username'],))
         user_contact_fromdb=cur.fetchone()
@@ -293,7 +294,11 @@ def logout():
    session.pop("loggedin")
    return render_template("logout.html")
 
-# function for fething user role for managing the permissions
+''' 
+def for fetching user_role who is currently logged in into to system
+this function takes parameter as username where session['username'] indicates the currently logged in user 
+returns the 0,1,2 where 0 indicates role employee, 1 indicates role manager and 2 indicates role root user or super admin
+'''
 def fetch_user_role(username):
   cur=mysql.connection.cursor()
   cur.execute('select user_role from users where user_username = %s',(username,))
@@ -303,7 +308,12 @@ def fetch_user_role(username):
     permission = user_role
     print("Permission : ",user_role)
   return permission
-
+''' 
+def for checking product is already exist or not,
+this function takes the b_value as a parameter which idicated the 13 digit string barcode value
+extracted by the extract_barcode module present in adapter.barcode_scanner 
+return bool value depends on the enrty found in db or not
+'''
 def check_product(b_value):
   cur = mysql.connection.cursor()
   cur.execute('select product_id from products where product_id = %s',(b_value,))
@@ -312,8 +322,9 @@ def check_product(b_value):
     return True
   else:
     return False
-  
-
-#To run the application
+'''
+Entry point of the app.py file
+execution of programm will starts from here and then it runs the flask app name app with debug option as True
+'''
 if __name__ == '__main__':
     app.run(debug=True)
