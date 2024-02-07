@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 05:17 AM
+-- Generation Time: Feb 07, 2024 at 06:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,38 @@ SET time_zone = "+00:00";
 --
 -- Database: `inventory`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `customer_name` varchar(20) DEFAULT NULL,
+  `customer_contact` varchar(20) NOT NULL,
+  `customer_email` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `organisation`
+--
+
+CREATE TABLE `organisation` (
+  `organisation_id` int(11) NOT NULL,
+  `organisation_name` varchar(20) DEFAULT NULL,
+  `organisation_type` varchar(20) DEFAULT NULL,
+  `organisation_location` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `organisation`
+--
+
+INSERT INTO `organisation` (`organisation_id`, `organisation_name`, `organisation_type`, `organisation_location`) VALUES
+(1, 'Inventree Client', 'General Stores', 'Pune');
 
 -- --------------------------------------------------------
 
@@ -48,11 +80,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_manufacturer`, `product_manufacturer_code`, `product_category`, `product_category_code`, `product_name`, `product_name_code`, `product_price`, `product_measure`, `product_size`, `product_expiry`, `product_mfg`, `product_stock_quantity`) VALUES
-('1', '2', '3', '4', '5', '6', '7', 8, '', '10', '0000-00-00', '0000-00-00', 13),
-('123456789012', '2', '3', '4', '5', '6', '7', 8, '', '10', '0000-00-00', '0000-00-00', 13),
-('2112345678900', '2', '3', '4', '5', '6', '7', 8, '', '10', '0000-00-00', '0000-00-00', 13),
-('9180201379684', '2', '3', '4', '5', '6', '7', 8, '', '10', '0000-00-00', '0000-00-00', 13),
-('9780201379624', '2', '3', '4', '5', '6', '7', 8, '', '10', '0000-00-00', '0000-00-00', 13);
+('9780201379624', '', '78020', '', '9', '', '37962', 0, '', 'Choose....', '0000-00-00', '0000-00-00', 10);
 
 -- --------------------------------------------------------
 
@@ -65,8 +93,8 @@ CREATE TABLE `users` (
   `user_username` varchar(30) DEFAULT NULL,
   `user_fullname` varchar(30) DEFAULT NULL,
   `user_password` varchar(16) DEFAULT NULL,
-  `user_role` tinyint(1) DEFAULT NULL,
-  `user_contact` varchar(10) DEFAULT NULL,
+  `user_role` int(1) DEFAULT NULL,
+  `user_contact` varchar(13) DEFAULT NULL,
   `user_email` varchar(30) DEFAULT NULL,
   `user_organisation_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -76,11 +104,26 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_username`, `user_fullname`, `user_password`, `user_role`, `user_contact`, `user_email`, `user_organisation_id`) VALUES
-(1, 'aditya', 'Aditya Tongse', '12345', 1, '7350932355', 'atongse100@gmail.com', 0);
+(1, 'Mansur_khan', 'Mansur Khan', 'Pass@123', 2, '+917757963133', 'mansur_khan@inventree.com', 1),
+(2, 'Aditya_Tongse', 'Aditya Tongse', 'Pass@123', 1, '+917350932355', 'aditya_tongse@inventree.com', 1),
+(3, 'Shrikant_Dhobale', 'Shrikant Dhobale', 'Pass@123', 0, '+917219794805', 'shrikant_dhobale@inventree.com', 1),
+(4, 'Vivek_Sharma', 'Vivek Sharma', 'Pass@123', 1, '+918305675632', 'vivek_sharma@inventree.com', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`customer_contact`);
+
+--
+-- Indexes for table `organisation`
+--
+ALTER TABLE `organisation`
+  ADD PRIMARY KEY (`organisation_id`);
 
 --
 -- Indexes for table `products`
@@ -93,6 +136,16 @@ ALTER TABLE `products`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `organisation`
+--
+ALTER TABLE `organisation`
+  MODIFY `organisation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
