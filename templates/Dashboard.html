@@ -52,72 +52,23 @@
     </nav>
 
     <!-- Body content  -->
-    {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                            {% for message in messages %}
-                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                                <strong>{{ message.title() }}!</strong> 
-                                <button type="button" class="btn-close" data-bs-dismiss="success" aria-label="Close"></button>
-                              </div>
-                            
-                            {% endfor %}
-                            {% endif %}
-                            {% endwith %}
-    <div class="container">
-      <div class="container text-center mt-4">
-        <!-- Numeric Statistics of items in the inventory -->
-        <div class="d-flex justify-content-evenly p-3">
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="TotalItems"
-            name="TotalItems"
-            disabled
-          >
-            <strong class="fs-1"> 1099 </strong> <br />
-
-            Total Items
-          </button>
-
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="Categories"
-            name="Categories"
-            disabled
-          >
-            <strong class="fs-1"> 20 </strong> <br />
-            Categories
-          </button>
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="ItemSold"
-            name="ItemSold"
-            disabled
-          >
-            <strong class="fs-1"> 150 </strong><br />
-            Items Sold
-          </button>
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="ProductReceived"
-            name="ProductReceived"
-            disabled
-          >
-            <strong class="fs-1"> 500 </strong><br />Products Recieved
-          </button>
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="NewProduct"
-            name="NewProduct"
-            disabled
-          >
-            <strong class="fs-1"> 15 </strong> <br />
-            New Products
-          </button>
+    <div class="container text-center">
+        <div class="row justify-content-evenly p-3 ">
+            <!-- Dashboard Menus  -->
+            <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="AddNewProduct"
+                name="AddNewProduct"><a href="Add_new_Products.html">Add New <br>
+                    Product</a></button>
+            <button type="button" class="col btn btn-outline-secondary btn-lg text-black  me-4" id="ProductList"
+                name="ProductList">Product <br>
+                List</button>
+            <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="UpdateProduct"
+                name="UpdateProduct"><a href="Add_Existing_product.html">Update
+                    a<br>Product</a> </button>
+            <button type="button" class="col btn btn-outline-secondary btn-lg text-black me-4" id="CreateBill"
+                name="CreateBill"><a href="Create_Bill.html"> Create <br> Bill</a> </button>
+            <button type="button" class=" col btn btn-outline-secondary btn-lg text-black me-4" id="ManageUsers"
+                name="ManageUsers">Manage <br>
+                Users</button>
         </div>
       </div>
 
