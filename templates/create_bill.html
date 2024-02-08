@@ -55,7 +55,7 @@
                             {% endwith %}
     <form action="{{url_for('create_bill')}}" method="post" target="">
     <div class="container">
-        <h3 class="mt-2 pt-3">Invoice Number :- ####</h3>
+        <h5 class="mt-2 pt-3">Invoice Number :- InvenTree0011</h5>
         <!-- Search bar -->
         
         <!-- Employee  List Code -->
@@ -70,19 +70,20 @@
                 </tr>
             </thead>
             <tbody id="bill_item_table">
-                {% set j=1 %}
-                {% for i in billing_items_barcodes %}
+                {% for i in range (billing_items_barcodes|length) %}
                 <tr>
-                    <td>{{j}}</td>
-                    <td>{{i}}</td>
-                    <td>{{i}}</td>
-                    <td>{{billing_items_barcodes[i]}}</td>
-                    <td>{{billing_items_barcodes[i]}}</td>
-                    
-                    
+                    <td>{{i+1}}</td>
+                    <td>{{billing_items_barcodes[i][1]}}</td>
+                    <td>{{billing_items_barcodes[i][2]}}</td>
+                    <td>{{billing_items_barcodes[i][3]}}</td>
+                    <td>{{billing_items_barcodes[i][3]*billing_items_barcodes[i][2]}}</td>     
                 </tr>
-                {% set j=j+1 %}
+                
                 {% endfor %}
+                {{total_sum}}
+
+                
+                
             </tbody>
         </table>
     </div>
@@ -91,21 +92,13 @@
         <div class="col-auto">
             <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-5"
                 type="button"><a href="/templates/Dashboard.html">Cancel</a></button>
-                <button id="id-scanmore" name="btn-scanmore" class="btn btn-light btn-outline" type="{{url_for('create_bill')}}" >Scan More</button>
-                <button id="id-sendbill" name="btn-sendbill" class="btn btn-light btn-outline" type="submit" >Send Bill</button>
+                <a href="{{url_for('send_bill')}}"><button id="id-sendbill" name="btn-sendbill" class="btn btn-light btn-outline" >Send Bill</button></a>
+                <button id="id-scanmore" name="btn-scanmore" class="btn btn-light btn-outline" href="{{url_for('create_bill')}}" >Scan More</button>
+                
         </div>
     </div>
 </form>
-    <!-- footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row justify-content-md-end">
-                <div class="col-auto">
-                    <span class="text-bg">© Copyright Persistent Systems Pvt. Ltd. 2024</span>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
 </body>
 
 </html>

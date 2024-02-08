@@ -1,299 +1,367 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>InvenTree Software</title>
-    <!-- CSS header files -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link href="/static/style.css" rel="stylesheet" />
-    <link rel="stylesheet" 
-      href="https://fonts.googleapis.com/css?family=Poppins"
-    />
-  </head>
+{% extends "base.html" %} {% block content %}
 
-  <body>
-    <!-- Header  -->
+<!-- Body content  -->
+{% with messages = get_flashed_messages() %} {% if messages %} {% for message in
+messages %}
+{%if flash_type == 'success'%}
+<P>{{flash_type}}</P>
+<div class="flashes" role="alert">
+  <strong>{{ message.title() }}!</strong>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="success"
+    aria-label="Close"
+  ></button>
+</div>
+{%endif%}
+<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+  <strong>{{ message.title() }}!</strong>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="success"
+    aria-label="Close"
+  ></button>
+</div>
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">InvenTree</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon" a="dashboard.html"></span>
-        </button>
-        <!-- Navbar icons -->
-        <div
-          class="collapse navbar-collapse justify-content-md-end"
-          id="navbarSupportedContent">
-          <button class="btn btn-light btn-outline me-2" type="button">
-            <a href="{{url_for('profile',username=session['username'])}}">Profile</a>
-          </button>
-          <button class="btn btn-light btn-outline me-2" type="button">
-            <a href="/contactus.html">Contact Us</a>
-          </button>
-          <button class="btn btn-light btn-outline me-2" type="button">
-            <a href="{{url_for('logout')}}">Logout</a>
-          </button>
-        </div>
-      </div>
-    </nav>
+{% endfor %} {% endif %} {% endwith %}
+<div class="container mt-5">
+  <!-- TODO -->
+  <h2>
+    Welcome
+    <span class="color-brand">{{session['username'].title()}}</span>!
+  </h2>
 
-    <!-- Body content  -->
-    {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                            {% for message in messages %}
-                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                                <strong>{{ message.title() }}!</strong> 
-                                <button type="button" class="btn-close" data-bs-dismiss="success" aria-label="Close"></button>
-                              </div>
-                            
-                            {% endfor %}
-                            {% endif %}
-                            {% endwith %}
-    <div class="container">
-      <div class="container text-center mt-4">
-        <!-- Numeric Statistics of items in the inventory -->
-        <div class="d-flex justify-content-evenly p-3">
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="TotalItems"
-            name="TotalItems"
-            disabled
-          >
-            <strong class="fs-1"> 1099 </strong> <br />
+  <!-- ----------------------------------------------------------- -->
+  <!-- Readonly Cards -->
+  <!-- ----------------------------------------------------------- -->
 
-            Total Items
-          </button>
-
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="Categories"
-            name="Categories"
-            disabled
-          >
-            <strong class="fs-1"> 20 </strong> <br />
-            Categories
-          </button>
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="ItemSold"
-            name="ItemSold"
-            disabled
-          >
-            <strong class="fs-1"> 150 </strong><br />
-            Items Sold
-          </button>
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="ProductReceived"
-            name="ProductReceived"
-            disabled
-          >
-            <strong class="fs-1"> 500 </strong><br />Products Recieved
-          </button>
-          <button
-            type="button"
-            class="col btn btn-light btn-lg text-black me-4"
-            id="NewProduct"
-            name="NewProduct"
-            disabled
-          >
-            <strong class="fs-1"> 15 </strong> <br />
-            New Products
-          </button>
-        </div>
-      </div>
-
-      <hr />
-
-   
-      <!--  -->
-      <!--  -->
-
-      <!-- --------------------------------------------- -->
-
-      <!-- <hr /> -->
-      <!--  -->
-      <!--  -->
-      <!-- Revision-2 -->
-      <div class="row gy-5 mt-5">
-        <div class="col-4">
-          <!-- Add user -->
-          <div class="gy-2">
-            <a
-             href="{{url_for('add_new_product')}}"
-              class="card mb-3 p-3 dashboard-item-card"
-              style="max-width: 540px"
-            >
-              <div class="d-flex g-0 justify-content-center">
-                <img
-                  src="../static/dashboard-cards/add new product (1).png"
-                  class="img-fluid rounded-start dashboard-img"
-                  alt="..."
-                />
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title" style="margin: 0">
-                      Add New Product
-                    </h5>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Product List -->
-          <div class="gy-2">
-            <a
-              href="{{url_for('product_list')}}"
-              class="card mb-3 p-3 dashboard-item-card"
-              style="max-width: 540px"
-            >
-              <div class="d-flex g-0 justify-content-center">
-                <img
-                  src="../static/dashboard-cards/List products.png"
-                  class="img-fluid rounded-start dashboard-img"
-                  alt="..."
-                />
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title" style="margin: 0">Product List</h5>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Update Product -->
-          <div>
-            <a
-              href="{{url_for('update_product')}}"
-              class="card mb-3 p-3 dashboard-item-card"
-              style="max-width: 540px"
-            >
-              <div class="d-flex g-0 justify-content-center">
-                <img
-                  src="../static/dashboard-cards/update products.png"
-                  class="img-fluid rounded-start dashboard-img"
-                  alt="..."
-                />
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title" style="margin: 0">Update Product</h5>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Create Bill -->
-          <div>
-            <a
-              href="{{url_for('customer_details')}}"
-              class="card mb-3 p-3 dashboard-item-card"
-              style="max-width: 540px"
-            >
-              <div class="d-flex g-0 justify-content-center">
-                <img
-                  src="../static/dashboard-cards/bill.png"
-                  class="img-fluid rounded-start dashboard-img"
-                  alt="..."
-                />
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title" style="margin: 0">Create Bill</h5>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Users -->
-          <div>
-            <a
-              href="{{url_for('employee_list')}}"
-              class="card mb-3 p-3 dashboard-item-card"
-              style="max-width: 540px"
-            >
-              <div class="d-flex g-0 justify-content-center">
-                <img
-                  src="../static/dashboard-cards/Users.png"
-                  class="img-fluid rounded-start dashboard-img"
-                  alt="..."
-                />
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title" style="margin: 0">Manage Users</h5>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- ... -->
-          <div class="m-3" style="max-width: 540px">
+  <div class="mt-3">
+    <!-- Numeric Statistics of items in the inventory -->
+    <div class="d-flex justify-content-evenly p-3">
+      <!-- TOTAL ITEMS v-2 -->
+      <div
+        class="card border-0 col me-4 bg-white shadow-sm bg-body-tertiary rounded"
+      >
+        <div class="d-flex flex-column p-3">
+          <div class="readonly-card-design"></div>
+          <div class="d-flex">
             <div
-              class="d-flex h-100 flex-column g-0 justify-content-center align-items-center"
+              class="dashboard-card-img ms-2 rounded-4 d-flex justify-content-center align-items-center"
             >
-              <div class="col-md-8">
-                <h5 class="text-center" style="margin: 0">...</h5>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-box2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="#FFFFFF"
+                  d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3zM7.5 1H3.75L1.5 4h6zm1 0v3h6l-2.25-3zM15 5H1v10h14z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="mt-1">
+            <p class="color-brand text-start mt-3 mb-0 fs-6">TOTAL ITEMS</p>
+            <!-- TODO -->
+            <p class="h3 text-start">{{total_items}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div
+        class="card border-0 col me-4 bg-white shadow-sm bg-body-tertiary rounded"
+      >
+        <div class="d-flex flex-column p-3">
+          <div class="readonly-card-design"></div>
+          <div class="d-flex">
+            <div
+              class="dashboard-card-img ms-2 rounded-4 d-flex justify-content-center align-items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-box2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="#FFFFFF"
+                  d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3zM7.5 1H3.75L1.5 4h6zm1 0v3h6l-2.25-3zM15 5H1v10h14z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="mt-1">
+            <p class="color-brand text-start mt-3 mb-0 fs-6">CATEGORIES</p>
+            <!-- TODO -->
+            <p class="h3 text-start">20</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM SOLD -->
+      <div
+        class="card border-0 col me-4 bg-white shadow-sm bg-body-tertiary rounded"
+      >
+        <div class="d-flex flex-column p-3">
+          <div class="readonly-card-design"></div>
+          <div class="d-flex">
+            <div
+              class="dashboard-card-img ms-2 rounded-4 d-flex justify-content-center align-items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-box2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="#FFFFFF"
+                  d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3zM7.5 1H3.75L1.5 4h6zm1 0v3h6l-2.25-3zM15 5H1v10h14z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="mt-1">
+            <p class="color-brand text-start mt-3 mb-0 fs-6">ITEM SOLD</p>
+            <!-- TODO -->
+            <p class="h3 text-start">150</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT RECEIVED -->
+      <div
+        class="card border-0 col me-4 bg-white shadow-sm bg-body-tertiary rounded"
+      >
+        <div class="d-flex flex-column p-3">
+          <div class="readonly-card-design"></div>
+          <div class="d-flex">
+            <div
+              class="dashboard-card-img ms-2 rounded-4 d-flex justify-content-center align-items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-box2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="#FFFFFF"
+                  d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3zM7.5 1H3.75L1.5 4h6zm1 0v3h6l-2.25-3zM15 5H1v10h14z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="mt-1">
+            <p class="color-brand text-start mt-3 mb-0 fs-6">
+              PRODUCT RECEIVED
+            </p>
+            <!-- TODO -->
+            <p class="h3 text-start">500</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW PRODUCTS -->
+      <div
+        class="card border-0 col me-4 bg-white shadow-sm bg-body-tertiary rounded"
+      >
+        <div class="d-flex flex-column p-3">
+          <div class="readonly-card-design"></div>
+          <div class="d-flex">
+            <div
+              class="dashboard-card-img ms-2 rounded-4 d-flex justify-content-center align-items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-box2"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="#FFFFFF"
+                  d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3zM7.5 1H3.75L1.5 4h6zm1 0v3h6l-2.25-3zM15 5H1v10h14z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="mt-1">
+            <p class="color-brand text-start mt-3 mb-0 fs-6">NEW PRODUCTS</p>
+            <!-- TODO -->
+            <p class="h3 text-start">15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="color-brand" />
+
+  <!-- ----------------------------------------------------------- -->
+  <!-- Features -->
+  <!-- ----------------------------------------------------------- -->
+
+  <div class="row gy-5 mt-2">
+    <div class="col-4">
+      <!-- Add New Product -->
+      <div class="gy-2">
+        <a
+          href="{{url_for('add_new_product')}}"
+          class="card mb-3 p-3 dashboard-item-card border-0"
+          style="max-width: 540px"
+        >
+          <div class="d-flex g-0 justify-content-center">
+            <img
+              src="../static/dashboard-cards/Buy.png"
+              class="img-fluid rounded-start dashboard-img"
+              alt="..."
+            />
+            <div class="col-md-8">
+              <div class="card-body border-0">
+                <h5 class="card-title" style="margin: 0">Add New Product</h5>
               </div>
             </div>
           </div>
-        </div>
+        </a>
+      </div>
+      <!-- -------------- -->
 
-        <div class="col-8">
-          <img
-            src="../static/chart1.png"
-            alt="Quarterly Profit record Record"
-            style="width: 100%"
-          />
-          <img
-            src="../static/chart2.png"
-            alt="Quarterly Sales Record"
-            style="width: 100%"
-          />
-        </div>
+      <!-- Update Product -->
+      <div>
+        <a
+          href="{{url_for('update_product')}}"
+          class="card mb-3 p-3 dashboard-item-card border-0"
+          style="max-width: 540px"
+        >
+          <div class="d-flex g-0 justify-content-center">
+            <img
+              src="../static/dashboard-cards/Edit Property.png  "
+              class="img-fluid rounded-start dashboard-img"
+              alt="..."
+            />
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="margin: 0">Update Product</h5>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
 
-      <!--  -->
-      
-    </div>
+      <!-- Create Bill -->
+      <div>
+        <a
+          href="{{url_for('customer_details')}}"
+          class="card mb-3 p-3 dashboard-item-card border-0"
+          style="max-width: 540px"
+        >
+          <div class="d-flex g-0 justify-content-center">
+            <img
+              src="../static/dashboard-cards/bill.png"
+              class="img-fluid rounded-start dashboard-img"
+              alt="..."
+            />
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="margin: 0">Create Bill</h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
 
-    <!-- Footer  -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row justify-content-md-end">
-          <div class="col-auto">
-            <span class="text-bg"
-              >© Copyright Persistent Systems Pvt. Ltd. 2024</span
-            >
+      <!-- Product List -->
+      <div class="gy-2">
+        <a
+          href="#"
+          class="card mb-3 p-3 dashboard-item-card border-0"
+          style="max-width: 540px"
+        >
+          <div class="d-flex g-0 justify-content-center">
+            <img
+              src="../static/dashboard-cards/Test Passed.png"
+              class="img-fluid rounded-start dashboard-img"
+              alt="..."
+            />
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="margin: 0">Product List</h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Users -->
+      <div>
+        <a
+          href="{{url_for('employee_list')}}"
+          class="card mb-3 p-3 dashboard-item-card border-0"
+          style="max-width: 540px"
+        >
+          <div class="d-flex g-0 justify-content-center">
+            <img
+              src="../static/dashboard-cards/Users.png"
+              class="img-fluid rounded-start dashboard-img"
+              alt="..."
+            />
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="margin: 0">Manage Users</h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ... -->
+      <div class="m-3" style="max-width: 540px">
+        <div
+          class="d-flex h-100 flex-column g-0 justify-content-center align-items-center"
+        >
+          <div class="col-md-8">
+            <h5 class="text-center" style="margin: 0">...</h5>
           </div>
         </div>
       </div>
-    </footer>
-    <!-- JavaScript header files -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    </div>
+
+    <div class="col-8">
+      <img
+        class="card shadow p-3 bg-body-tertiary rounded border-0"
+        src="../static/chart1.png"
+        alt="Quarterly Profit record Record"
+        style="width: 100%"
+      />
+      <img
+        class="card shadow p-3 bg-body-tertiary rounded border-0 mt-3"
+        src="../static/chart2.png"
+        alt="Quarterly Sales Record"
+        style="width: 100%"
+      />
+    </div>
+  </div>
+
+  <!--  -->
+</div>
+
+{% endblock %}

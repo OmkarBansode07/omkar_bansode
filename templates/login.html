@@ -1,105 +1,138 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InvenTree</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InvenTree Software</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/static/style.css" rel="stylesheet" />
 
-    <link href="/static/style.css" rel="stylesheet">
-</head>
-
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-
-    <!-- Header  -->
-
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">InvenTree</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
-                <a href = "/">
-                <button class="btn btn-light btn-outline btn-block mt-2 fs-6 btn-sm" type="submit">About Us</button>
-                </a>
-            </div>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body class="bg-base">
+    <!-- navbar -->
+    <nav class="navbar bg-body-tertiary px-4 bg-base">
+      <div class="container-fluid">
+        <a href="/" class="navbar-brand mb-0 h1 color-brand">InvenTree</a>
+        <div>
+          <a href="/" class="nav-link">About Us</a>
         </div>
+      </div>
     </nav>
 
-
-
-    <!-- body content -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="container-fluid mt-5 md-5" style="max-width: 650px; height:450px;padding:5% 5% 5% 5%;">
-                    <!-- modified  -->
-                    <img src="/static/Image_Login.png" alt="Image" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mt-4 me-md-4 custom-card ">
-                    <div class="card-body ">
-                        <h3 class="card-title text-center">Login to continue</h3>
-
-                        <form action="{{url_for('login')}}" method="post">
-                            <!-- Username -->
-                            <div class="form-floating mb-3 mt-4">
-                                <input type="username" class="form-control" id="username"
-                                    placeholder="Enter your username" name="username">
-                                <!-- modified  -->
-
-                                <label for="username">Username</label>
-                            </div>
-                            <!-- Password -->
-                            <div class="form-floating mt-4">
-                                <input type="password" class="form-control" id="password"
-                                    placeholder="Enter your Password" name="password">
-                                <label for="password">Password</label>
-                            </div>
-                            {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                            {% for message in messages %}
-                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                                <strong>{{ message.title() }}!</strong> 
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                              </div>
-                            
-                            {% endfor %}
-                            {% endif %}
-                            {% endwith %}
-                            <button type="submit" class="btn btn-light btn-outline btn-block mt-4 login-btn btn-lg">Login</button>
-                            <!-- <button type="submit" class="btn btn-light btn-block mt-4 btn-lg login-btn">Login</button> -->
-                        </form>
-
-                        <div class="text-md-end mt-2">
-                            <a href="#">Forgot Password?</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Main -->
+    <div class="container mt-5">
+      <!-- IMG -->
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="col-6">
+          <img
+            class="login-img"
+            src="../static/login_img.svg"
+            alt="Login-page-image"
+          />
         </div>
+
+        <div class="col-2"></div>
+
+        <!-- FORm -->
+        <div class="col-4 card d-flex align-items-center p-3 border-0">
+          <h3 class="color-brand mt-4">LOGIN</h3>
+          <form
+            action="{{url_for('login')}}"
+            method="post"
+            class="mt-4 w-100 p-2"
+          >
+            <div
+              class="form-floating border-0 border-bottom border-danger mb-3"
+            >
+              <input
+                type="username"
+                class="form-control border-0 shadow-none"
+                autocomplete="off"
+                required
+                id="username"
+                placeholder="Enter your username"
+                name="username"
+              />
+              <label for="username">Username</label>
+            </div>
+
+            <div
+              class="form-floating border-0 border-bottom border-danger mb-3 d-flex align-items-center"
+            >
+              <input
+                type="password"
+                class="form-control shadow-none border-0"
+                autocomplete="off"
+                required
+                id="password"
+                placeholder="Enter your password"
+                name="password"
+              />
+
+              <label for="password">Password</label>
+              <i class="bi bi-eye-slash" id="togglePassword"></i>
+            </div>
+
+            <div class="text-md-end mt-2">
+              <a href="{{url_for('forgot_password')}}" class="color-brand">Forgot Password?</a>
+            </div>
+            {% with messages = get_flashed_messages() %} {% if messages %} {%
+            for message in messages %}
+            <div
+              class="alert alert-danger alert-dismissible fade show mt-3"
+              role="alert"
+            >
+              <strong>{{ message.title() }}!</strong>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            {% endfor %} {% endif %} {% endwith %}
+            <button
+              type="submit"
+              class="btn btn-block w-100 mt-5 mb-4 login-btn btn-lg color-brand toggle-button"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
+    <!-- ---------------------------------------------- -->
 
-    <!-- footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row justify-content-md-end">
-                <div class="col-auto">
-                    <span class="text-bg">© Copyright Persistent Systems Pvt. Ltd. 2024</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
+    <script>
+      let eyeicon = document.getElementById("togglePassword")
+      let password = document.getElementById("password")
 
+      eyeicon.onclick = function(){
+        if (password.type == "password"){
+          password.type = "text"
+        } else{
+          password.type = "password"
+        }
+      }
+
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

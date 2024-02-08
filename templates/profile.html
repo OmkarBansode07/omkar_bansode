@@ -31,11 +31,11 @@
             <!-- navbar icons -->
             <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
                 <button class="btn btn-light btn-outline me-2" type="button"><a
-                        href="/templates/Dashboard.html">Dashboard</a></button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/ContactUs.html">Contact
+                        href="{{url_for('dashboard')}}">Dashboard</a></button>
+                <button class="btn btn-light btn-outline me-2" type="button"><a href="{{url_for('contactus')}}">Contact
                         Us</a></button>
                 <button class="btn btn-light btn-outline me-2" type="button"><a
-                        href="/templates/Logout_page.html">Logout</a></button>
+                        href="{{url_for('logout')}}">Logout</a></button>
             </div>
         </div>
     </nav>
@@ -67,7 +67,15 @@
                         <!-- Designation -->
                         <label for="staticrole" class="col-sm-4 col-form-label">Designation : </label>
                         <div class="col-sm-8 ">
-                            <input type="text" readonly class="form-control-plaintext" value="{{ user[1]}}">
+                            <!-- if else -->
+
+                        {% if  user[1] == 0: %}
+                        <input type="text" readonly class="form-control-plaintext" value="Employee">
+                        {% elif user[1] == 1: %}
+                        <input type="text" readonly class="form-control-plaintext" value="Manager">
+                        {% else %}
+                        <input type="text" readonly class="form-control-plaintext" value="Super Admin">
+                        {% endif %}
                         </div>
                         <!-- Contact Number -->
                         <label for="staticMob" class="col-sm-4 col-form-label">Contact Number : </label>

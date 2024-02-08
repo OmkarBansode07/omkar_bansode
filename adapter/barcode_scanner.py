@@ -28,12 +28,21 @@ def scan():
     
     cap = cv2.VideoCapture(0)
     result=""
-    while True:
+    keep_window_open=True
+    while keep_window_open:
         ret, frame = cap.read()
         result = decoder(frame)
         cv2.imshow('Image', frame)
+        try :
+            cv2.setWindowProperty('Image',cv2.WND_PROP_TOPMOST,1)
+        except:
+            pass
     
         # Break the loop after the first successful scan
+        key=cv2.waitKey(1) & 0xFF
+        if key == ord('q') or key==27:
+            keep_window_open = False        
+
         if result is not None:
             break
     
@@ -42,9 +51,9 @@ def scan():
             break
     
     cap.release()
-    
-    return result
     cv2.destroyAllWindows()
+
+    return result
 
 def extract_barcode():
     barcode_value=scan()

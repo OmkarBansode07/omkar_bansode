@@ -44,6 +44,31 @@
 
 
     <!-- body content -->
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in
+        messages %}
+        {%if flash_type == 'success'%}
+        <P>{{flash_type}}</P>
+        <div class="flashes" role="alert">
+          <strong>{{ message.title() }}!</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="success"
+            aria-label="Close"
+          ></button>
+        </div>
+        {%endif%}
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+          <strong>{{ message.title() }}!</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="success"
+            aria-label="Close"
+          ></button>
+        </div>
+        
+        {% endfor %} {% endif %} {% endwith %}
     <div class="container">
         <div class="row justify-content-end mt-4">
             <!-- back button -->
