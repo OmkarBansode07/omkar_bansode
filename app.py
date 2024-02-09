@@ -72,7 +72,7 @@ def login():
           created_otp = otp.generate_otp()
           cur.close()
           print("created otp : ", created_otp)
-          #otp.send_otp(user_contact,created_otp)
+          otp.send_otp(user_contact,created_otp)
           return redirect(url_for('otp_page'))
       else:
           print("else")
@@ -152,10 +152,7 @@ def add_new_product():
       
 
       if request.method=='GET':
-        if len(session.get('p_barcode_existing',None))>=0:
-          barcode_value=list(session['p_barcode_existing'])
-        else:
-          barcode_value=barcode_scanner.extract_barcode()
+        barcode_value=barcode_scanner.extract_barcode()
         print(check_product(barcode_value[0]))
         if check_product(barcode_value[0]):
           flash("You already have this product into the inventory kindly uodate.")
@@ -362,7 +359,7 @@ def users_details_page(user_id):
 #Resend otp page:
 @app.route('/resend_otp')
 def resend_otp():
-   #otp.send_otp("+917757963133",created_otp)
+   otp.send_otp("+917757963133",created_otp)
    flash("New OTP Sent!! ",'success')
    return redirect(url_for('otp_page'))
  

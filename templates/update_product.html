@@ -1,116 +1,44 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InvenTree Software</title>
-    <!-- CSS files  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="/static/style.css" rel="stylesheet">
-</head>
-
-<body>
-    <!-- javascript header files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-
-    <!-- Header of page-->
-
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">InvenTree</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
-                <!-- navbar icons  -->
-                <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-2" type="button"><a
-                    href="/templates/Dashboard.html">Dashboard</a></button>
-            <!-- <button id="id-profile" name="btn-profile"class="btn btn-light btn-outline me-2" type="button"><a href="/templates/Profile.html">Profile</a></button> -->
-            <button id="id-contactus" name="btn-contactus" class="btn btn-light btn-outline me-2" type="button"><a
-                    href="/templates/ContactUs.html">Contact
-                    Us</a></button>
-            <button id="id-logout" name="btn-logout" class="btn btn-light btn-outline me-2" type="button"><a
-                    href="/templates/Logout_page.html">Logout</a></button>
-            </div>
+{% extends "base.html" %}
+{% block content %}
+ 
+ 
+ 
+<!-- body content -->
+<div class="container" style="height: 72vh;">
+ 
+    <h3 class="mt-5">Add Exiting Product</h3>
+ 
+    <form action="{{url_for('update_product')}}" method="post" target="_blank">
+        <!-- product id code -->
+        <div class="mb-3 mt-5">
+            <h6>Product ID/Barcode ID : {{p_barcode}}</h6>
         </div>
-    </nav>
-
-
-
-    <!-- body content -->
-    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in
-        messages %}
-        {%if flash_type == 'success'%}
-        <P>{{flash_type}}</P>
-        <div class="flashes" role="alert">
-          <strong>{{ message.title() }}!</strong>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="success"
-            aria-label="Close"
-          ></button>
+ 
+        <!-- stock quantity code -->
+        <div class="mb-3 mt-4 pb-6">
+            <label for="ProductStockQuantity" class="form-label">Product Stock Quantity :</label>
+            <input type="text" class="form-control" id="productstockquantity" name="productstockquantity"
+                placeholder="Enter Product Stock Quantity">
         </div>
-        {%endif%}
-        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-          <strong>{{ message.title() }}!</strong>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="success"
-            aria-label="Close"
-          ></button>
-        </div>
-        
-        {% endfor %} {% endif %} {% endwith %}
-    <div class="container">
-        <div class="row justify-content-end mt-4">
-            <!-- back button -->
-            <div class="col">
-                <a href="#" class="btn btn-light" onclick="history.go(-1);">Back</a>
-            </div>
+ 
+ 
+        <div class="row justify-content-center ">
             <div class="col-auto">
-                <!-- Button of cancel and add product  -->
-                <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-5" type="button"><a
-                    href="/templates/Dashboard.html">Cancel</a></button>
-            <button id="id-addnewproduct" name="btn-addnewproduct" class="btn btn-light btn-outline" type="button" data-bs-toggle="modal"
-                data-bs-target="#ProductAddModal">Add Product</button>
+                <!-- cancel and add product code  -->
+                <a id="id-dashboard" name="btn-dashboard" class="btn btn-primary me-5"
+                    href="{{url_for('dashboard')}}">Cancel</a>
+                <button id="id-addproduct" name="btn-addproduct" class="btn btn-primary" type="submit"
+                    data-bs-toggle="modal" data-bs-target="#ProductAddModal">
+                    Add Product
+                </button>
+               
             </div>
-        </div><br>
-        <h3>Add Exiting Product</h3>
-        <form action="{{url_for('update_product')}}" method="post" target="_blank">
-            <!-- product id code -->
-            <div class="mb-3 mt-4">
-                <label for="ProductID" class="form-label">Product ID/Barcode ID :</label>
-                <input type="text" class="form-control" id="id-productid" name="input-productid"
-                    placeholder={{p_barcode}} readonly>
-            </div>
-            <!-- stock quantity code -->
-            <div class="mb-3 mt-4">
-                <label for="ProductStockQuantity" class="form-label">Product Stock Quantity :</label>
-                <input type="text" class="form-control" id="productstockquantity" name="productstockquantity"
-                    placeholder="Enter Product Stock Quantity">
-            </div>
-            <div class="row justify-content-center mt-4">
-                <div class="col-auto">
-                    <!-- cancel and add product code  -->
-                    <button id="id-dashboard" name="btn-dashboard" class="btn btn-light btn-outline me-5" type="button"><a
-                        href="/templates/Dashboard.html">Cancel</a></button>
-                <button id="id-addnewproduct" name="btn-addnewproduct" class="btn btn-light btn-outline" type="submit" data-bs-toggle="modal"
-                    data-bs-target="#ProductAddModal">Add Product</button>
-            </div>
-        </form>
-    </div>
-
-
-    <!-- footer -->
-    <footer class="footer">
+    </form>
+</div>
+ 
+{%endblock%}
+<!-- footer -->
+<!-- <footer class="footer">
         <div class="container">
             <div class="row justify-content-md-end">
                 <div class="col-auto">
@@ -118,6 +46,6 @@
                 </div>
             </div>
         </div>
-    </footer>
-</body>
-</html>
+    </footer> -->
+<!-- </body>
+</html> -->
