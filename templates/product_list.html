@@ -1,62 +1,17 @@
-<!doctype html>
-<html lang="en">
-<!-- comment -->
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InvenTree Software</title>
-    <!-- CSS files -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="/static/style.css" rel="stylesheet">
-</head>
+{% extends "base.html" %}
  
-<body>
-    <!-- javascript header files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
- 
-    <!-- Header  -->
- 
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">InvenTree</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- navbar icons -->
-            <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
-                <button class="btn btn-light btn-outline me-2" type="button"><a
-                        href="/templates/Dashboard.html">Dashboard</a></button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a
-                        href="/templates/Profile.html">Profile</a></button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a href="/templates/ContactUs.html">Contact
-                        Us</a></button>
-                <button class="btn btn-light btn-outline me-2" type="button"><a
-                        href="/templates/Logout_page.html">Logout</a></button>
-            </div>
-        </div>
-    </nav>
- 
- 
- 
+
+{% block content %}
     <!-- body content -->
-    <div class="container">
-        <div class="row">
-            <div class="col pt-3">
-                <a href="#" class="btn btn-light" onclick="history.go(-1);">Back</a>
-            </div>
-        </div>
+    <div class="container" style="min-height: 430px;">
+        
  
-        <h3 class="mt-2 pt-3">Product List</h3>
+        <h3 class="mt-5 ">Product List</h3>
         <!-- Search bar -->
-        <div class="col-md-10 justify-content-center pt-3 mt-2 ">
+        <!-- <div class="col-md-10 justify-content-center pt-3 mt-2 ">
             <input type="text" id="SearchInput" class="searchItem form-control mb-3 "
                 placeholder="Enter ProductID/Barcode ID to Search Items" name="searchitems">
-        </div>
+        </div> -->
         <!-- Product List Code -->
         <table class="table table-striped table-hover mt-5">
             <thead>
@@ -81,17 +36,4 @@
     </div>
  
  
- 
-    <!-- footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row justify-content-md-end">
-                <div class="col-auto">
-                    <span class="text-bg">© Copyright Persistent Systems Pvt. Ltd. 2024</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
- 
-</html>
+    {% endblock %}
