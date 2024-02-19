@@ -72,7 +72,7 @@ def login():
         return render_template('login.html')
   except:
     flash("Something went wrong, please try again !!")
-    return render_template('login.html')
+    return redirect(url_for('login'))
       
 '''This route wil send a password to the whatsapp of the user when user want to forgot the password
 contact will be fetch from db
@@ -98,7 +98,7 @@ def forgot_password():
       return render_template('forgot_password.html')
   except:
     flash("Something went wrong, please try again!!")
-    return render_template('forgot_password.html')
+    return redirect(url_for('forgot_password'))
 
 '''otp validation'''
 global user_entered_otp
@@ -118,7 +118,8 @@ def otp_page():
         return render_template("otp_page.html")
   except:
     flash("Something went wrong, please retry!!")
-    return render_template("otp_page.html")
+    return redirect(url_for('otp_page'))
+     
 
 '''Dashboard Page'''
 @app.route('/dashboard')
@@ -139,7 +140,7 @@ def dashboard():
       return render_template('login.html')
   except:
     flash("Something went wrong please login again to continue ")
-    return render_template('login.html')
+    return redirect(url_for('login'))
  
 '''Add new product'''
 @app.route('/add_new_product',methods=['GET','POST'])
@@ -183,7 +184,7 @@ def add_new_product():
       return render_template('login.html')
   except:
     flash("Something went wrong please try again!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 '''Product List '''  
 @app.route('/product_list', methods=['GET', 'POST'])
@@ -199,7 +200,7 @@ def product_list():
       return render_template('login.html')
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
   
 '''Product Details List'''
 @app.route('/product_details_page/<product_id>' , methods=['GET', 'POST'])
@@ -215,7 +216,7 @@ def product_details_page(product_id):
       return render_template('login.html')
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 '''update new product'''
 @app.route('/update_product',methods=['GET','POST'])
@@ -257,18 +258,20 @@ def update_product():
       return render_template('login.html')
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 '''customer details page'''
+global customer_contact
+customer_contact=""
 @app.route('/customer_details',methods=['GET','POST'])
 def customer_details():
   try:
     if len(session)>0:
-      if request.method=='GET':
-        return render_template('customer_details.html')
-      else:
+      if request.method=='POST':
+        print("Inside post method : in customer_details")
         customer_name= request.form['customername']
         customer_contact="+91"+request.form['customercontact']
+        print("customer_contact",customer_contact)
         customer_email=request.form['customeremail']
         cur=mysql.connect.cursor()
         cur.execute('insert into customers values(%s,%s,%s)',('a','a','a'))
@@ -277,9 +280,10 @@ def customer_details():
         return render_template('create_bill.html',customer_name=customer_name,customer_contact=customer_contact,customer_email=customer_email)
     else:
       return render_template('login.html')
+    return render_template('customer_details.html')
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 '''create bill'''
 
@@ -288,7 +292,7 @@ item_list=[]
 billing_items={}
 @app.route('/create_bill',methods=['GET','POST'])
 def create_bill():
-  # try:
+  try:
     if len(session)>0:
       cur=mysql.connection.cursor()
       value=barcode_scanner.extract_barcode()
@@ -325,9 +329,9 @@ def create_bill():
         return render_template('create_bill.html',billing_items_barcodes=item_list,total_sum=total_sum)
     else:
       return render_template('login.html')
-  # except:
-  #   flash("Something went wrong, please retry!!")
-  #   return render_template('dashboard.html')
+  except:
+    flash("Something went wrong, please retry!!")
+    return redirect(url_for('create_bill'))
   
 '''sending the bill'''
 # todo
@@ -352,7 +356,8 @@ def send_bill():
       cur.close()
       
       print(item)
-    otp.send_otp("+917757963133",f"{bill_str}%0A Total : {total_sum}")
+    print("Customer_Contact",customer_contact)
+    otp.send_otp(customer_contact,f"{bill_str}%0A Total : {total_sum}")
     flash("Bill has been sent successfully.")
     return render_template('dashboard.html')
   else:
@@ -373,7 +378,7 @@ def employee_list():
       return render_template('employee_list.html', employeeList = employeeList)
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
  
 '''users details page'''
 @app.route('/users_details_page/<user_id>' , methods=['GET', 'POST'])
@@ -386,7 +391,7 @@ def users_details_page(user_id):
     return render_template('users_details_page.html',employeedetails=employeedetails)
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
   
 '''Resend otp page'''
 @app.route('/resend_otp')
@@ -397,7 +402,7 @@ def resend_otp():
     return redirect(url_for('otp_page'))
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 '''profile page'''
 @app.route('/profile',methods=['GET', 'POST'])
@@ -410,7 +415,7 @@ def profile():
     return render_template('profile.html', user = user)
   except:
     flash("Something went wrong, please retry!!")
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 '''logout function '''
 @app.route('/logout', methods=['GET','POST'])
@@ -420,7 +425,7 @@ def logout():
     session.pop("loggedin")
     return render_template("logout.html")
   except:
-    return render_template('login.html')
+    return redirect(url_for('login'))
 
 '''404 Notfound error'''
 @app.errorhandler(404)
