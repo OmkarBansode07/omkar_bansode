@@ -4,11 +4,28 @@
  
  
 <!-- body content -->
+{% with messages = get_flashed_messages() %} {% if messages %} {%
+    for message in messages %}
+    <div
+      class="alert alert-danger alert-dismissible fade show mt-3"
+      role="alert"
+    >
+      <strong>{{ message.title() }}!</strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+
+    {% endfor %} {% endif %} {% endwith %}
+    
 <div class="container" style="height: 72vh;">
  
     <h3 class="mt-5">Add Exiting Product</h3>
  
-    <form action="{{url_for('update_product')}}" method="post" target="_blank">
+    <form action="{{url_for('update_product')}}" method="post" target="">
         <!-- product id code -->
         <div class="mb-3 mt-5">
             <h6>Product ID/Barcode ID : {{p_barcode}}</h6>

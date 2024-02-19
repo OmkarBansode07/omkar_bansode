@@ -20,7 +20,7 @@ def send_otp(contact_number,otp_value):
     time.sleep(15)
     keyboard.press_and_release('enter')
     time.sleep(5)
-    # keyboard.press_and_release('alt+f4')
+    keyboard.press_and_release('ctrl+w')
 
 # main method to create the objects and call them
 if __name__=='__main__':

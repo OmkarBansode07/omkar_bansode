@@ -1,8 +1,5 @@
 {% extends "base.html" %}
- 
 {% block content %}
-       
- 
     <!-- body content -->
     <div class="container mt-5" style="min-height: 440px;">
        
@@ -42,7 +39,7 @@
                         data-bs-toggle="modal" data-bs-target="#ProductAddModal">
                          Add Product
                     </button> -->
-                    <button id="id-scanproduct" name="btn-scanproduct" class="btn btn-primary" type="{{url_for('create_bill')}}" data-bs-toggle="modal"
+                    <button id="id-scanproduct" name="btn-scanproduct" class="btn btn-primary" type=submit data-bs-toggle="modal"
                     data-bs-target="#scanModal">Scan Product</button>
                 </div>
                 </div>
@@ -78,7 +75,5 @@
                 </div>
             </div>
         </div>
-    </div>
- 
- 
+    </div> 
     {% endblock %}

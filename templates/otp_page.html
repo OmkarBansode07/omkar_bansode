@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>InvenTree Software</title>
@@ -69,15 +70,22 @@
             <div class="text-md-end mt-2">
               <a href="{{url_for('resend_otp')}}" class="color-brand">Resend OTP?</a>
             </div>
-            {% with messages = get_flashed_messages(with_categories=true) %} 
-            {% if messages %} 
-            <ul  class="flashes mb-0">
-            {% for category, message in messages %}
-            <div>
-              <li class="{{category}} mb-0">{{message}}</li>
-            </div>
-            </ul>
-            {% endfor %} {% endif %} {% endwith %}
+            {% with messages = get_flashed_messages() %} {% if messages %} {%
+              for message in messages %}
+              <div
+                class="alert alert-danger alert-dismissible fade show mt-3"
+                role="alert"
+              >
+                <strong>{{ message.title() }}!</strong>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+  
+              {% endfor %} {% endif %} {% endwith %}
             <button
               type="submit"
               class="btn btn-block w-100 mt-5 mb-4 login-btn btn-lg color-brand toggle-button"
